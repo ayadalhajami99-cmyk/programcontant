@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام التسويق بالمحتوى والذكاء الاصطناعي | برنامج تدريبي متكامل</title>
+    
+    <!-- Google Fonts: Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Embedded CSS Code -->
+    <style>
+        /* --- Global Variables & Styles --- */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #1a2a6c;
+            --accent-color: #00a8cc;
+            --text-color: #333;
+            --light-gray-bg: #f8f9fa;
+            --white-color: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --font-family: 'Cairo', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            direction: rtl;
+            text-align: right;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white-color);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 3rem; color: var(--secondary-color); }
+        h2 { font-size: 2.2rem; color: var(--secondary-color); text-align: center; margin-bottom: 2.5rem; }
+        h3 { font-size: 1.3rem; color: var(--primary-color); }
+
+        p { margin-bottom: 1rem; }
+        .subtitle { text-align: center; font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto 3rem auto; }
+
+        /* --- Header --- */
+        header {
+            background: var(--white-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: background-color 0.3s ease;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        /* --- Buttons --- */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+        }
+
+        .cta-button.large {
+            font-size: 1.2rem;
+            padding: 15px 35px;
+            margin-top: 1.5rem;
+        }
+
+        /* --- Sections --- */
+        section {
+            padding: 80px 0;
+        }
+
+        section.light-bg {
+            background-color: var(--light-gray-bg);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            text-align: center;
+            padding-top: 150px; /* Account for fixed header */
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015') no-repeat center center/cover;
+        }
+
+        #hero h1 {
+            margin-bottom: 1.5rem;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem auto;
+            color: #555;
+        }
+
+        /* --- Grid Layouts --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        /* --- Cards --- */
+        .card {
+            background: var(--white-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .audience-card {
+            text-align: center;
+        }
+
+        .audience-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* --- Steps --- */
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding-left: 80px;
+            position: relative;
+        }
+
+        .step:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* --- Instructors Section --- */
+        .instructors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .instructor-card {
+            text-align: center;
+        }
+
+        .instructor-card img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid var(--light-gray-bg);
+        }
+
+        .instructor-card h3 {
+            margin-bottom: 0.2rem;
+        }
+
+        .instructor-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* --- Final CTA Section --- */
+        #final-cta {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+            text-align: center;
+        }
+
+        #final-cta h2, #final-cta h3 {
+            color: var(--white-color);
+        }
+
+        #final-cta .cta-button {
+            background-color: var(--white-color);
+            color: var(--secondary-color);
+            border-color: var(--white-color);
+        }
+
+        #final-cta .cta-button:hover {
+            background-color: transparent;
+            color: var(--white-color);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #222;
+            color: #aaa;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: #aaa;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            
+            header .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            #hero {
+                padding-top: 180px;
+            }
+            
+            .step {
+                padding-left: 70px;
+            }
+            
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            footer .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">برنامج المحتوى الذكي </a>
+            <a href="الاستمارة.html" class="cta-button" target="_blank" rel="noopener noreferrer">احجز مقعدك الآن</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <h1>بناء نظام تسويقي متكامل: دمج استراتيجية المحتوى بالذكاء الاصطناعي</h1>
+                <p>الذكاء الاصطناعي لا يصنع محتوى فعّالًا
+إذا لم تكن لديك استراتيجية واضحة.
+
+وفي المقابل،
+الاستراتيجية وحدها—من دون أدوات ذكية تدعمها—لن توصلك إلى النتائج التي تطمح لها.</p>
+               
+                <a href="الاستمارة.html" class="cta-button large" target="_blank" rel="noopener noreferrer">استثمر في مستقبل مشروعك</a>
+            </div>
+        </section>
+
+              <!-- Target Audience Section -->
+        <section id="target-audience">
+            <div class="container">
+                <h2>هذا البرنامج مصمم خصيصاً لك إذا كنت:</h2>
+                <div class="grid-3">
+                    <div class="audience-card">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>مسوقاً أو صانع محتوى</h3>
+                        <p>تريد رفع مستوى استراتيجياتك ودمجها مع التكنولوجيا الحديثة.</p>
+                    </div>
+                    <div class="audience-card">
+                        <i class="fas fa-briefcase"></i>
+                        <h3>صاحب مشروع</h3>
+                        <p>يسعى لبناء حضور رقمي فعال دون الاعتماد على فرق خارجية.</p>
+                    </div>
+                    <div class="audience-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>راغب في بناء حضور رقمي</h3>
+                        <p>كل من يريد الدخول إلى عالم الأعمال وتقديم خدماته بشكل احترافي.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Outcomes Section -->
+        <section id="outcomes" class="light-bg">
+            <div class="container">
+                <h2>بعد 5 أيام فقط، ستكون قادراً على:</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <i class="fas fa-chess"></i>
+                        <h3>صياغة استراتيجية محتوى متكاملة</h3>
+                        <p>مرتبطة بأهدافك التسويقية الفعلية، مع خطة نشر واضحة.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-brain"></i>
+                        <h3>تحويل الأفكار لنظام محتوى قابل للتوسع</h3>
+                        <p>باستخدام أدوات الذكاء الاصطناعي بفعالية ووعي.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-robot"></i>
+                        <h3>أتمتة ردود العملاء</h3>
+                        <p>وبناء تجربة تواصل احترافية توفر وقتك وجهودك.</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-globe"></i>
+                        <h3>إنشاء موقع احترافي من الصفر</h3>
+                        <p>يعكس خبرتك وقيمتك الحقيقية بدون أي تكلفة إضافية.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Instructors Section -->
+        <section id="instructors">
+            <div class="container">
+                <h2>محاور البرنامج</h2>
+                
+                <div class="instructors-grid">
+                    <div class="instructor-card">
+                        <div class="card">
+                        <i class="fas fa-robot"></i>
+                        <p>•	الأساس الاستراتيجي للمحتوى ولماذا لا يعمل مع الجميع  </p>
+                        <p>      •	تحديد الهدف التسويقي قبل صناعة المحتوى</p>
+                         <p>      •	صياغة الرسالة والقيمة التي تعكس خبرتك</p>
+                         <p>      •	بناء استراتيجية محتوى قابلة للتنفيذ</p>
+                         <p>      •	اختيار قنوات المحتوى المناسبة</p>
+                         <p>      •	أنواع المحتوى التي تخدم كل مرحلة من مراحل رحلة العميل</p>
+                         <p>      •	خطة النشر</p>
+                         <p>      •	قياس أداء المحتوى بطريقة بسيطة</p>
+                    </div>
+                       <div class="instructor-card">
+                        <div class="card">
+                        <i class="fas fa-robot"></i>
+                        <p>•	فهم دور الذكاء الاصطناعي في بيئة المشاريع. </p>
+                        <p>      •	أهم الاتجاهات العالمية في AI Business.</p>
+                         <p>      •	هندسة الأوامر والمحتوى التوليدي .</p>
+                         <p>      •	تحديد الهدف والاتجاه بالمحتوى بإستخدام AI</p>
+                         <p>      •	تحليل المنافسين و مشاكل السوق وصياغة فرضيات الحلول بإستخدام الذكاء الاصطناعي .</p>
+                         <p>      •	نمذجة المنتجات (Mockups) وعروض المشاريع." Flair.ai "</p>
+                         <p>      •	الاتمتة و تصميم المواقع الكترونية التجارية بإستخدام AI.</p>
+                    </div>
+
+                    
+        <!-- Instructors Section -->
+        <section id="instructors">
+            <div class="container">
+                <h2>مدربين البرنامج</h2>
+                <p class="subtitle">قوة الخبرة تجتمع لتدريبك</p>
+                <div class="instructors-grid">
+                    <div class="instructor-card">
+                        <img src="esraa.jpg.jpg" alt="صورة د. إسراء السقاف">
+                        <h3>د. إسراء السقاف</h3>
+                        <p class="instructor-title">مدربة التسويق بالمحتوى</p>
+                        <p>مدربة في مجال ريادة الأعمال منذ عام 2013، ساعدت العديد من ملاك المشاريع في إيجاد حلول فعالة لمشكلاتهم التسويقية.</p>
+                    </div>
+                    <div class="instructor-card">
+                        <!-- تم تحديث الرابط هنا -->
+                        <img src="ayad.jpg.jpeg" alt="صورة أياد السفياني">
+                        <h3>أياد السفياني</h3>
+                        <p class="instructor-title">مهندس تقني ومدرّب مشاريع ريادية</p>
+                        <p>متخصص في تطوير المشاريع الريادية باستخدام أدوات الذكاء الاصطناعي، أقدم برامج تدريبية واستشارية تطبيقية تهدف إلى رفع الإنتاجية.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+  
+
+        <!-- Unique Selling Proposition Section -->
+        <section id="unique" class="light-bg">
+            <div class="container">
+                <h2>لماذا هذا البرنامج مختلف؟</h2>
+                <p class="subtitle">لأنه لا يعلمك أداة منفصلة أو مهارة معزولة، بل يأخذك في رحلة متكاملة:</p>
+                <div class="steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <h3>نبدأ بالفكر الاستراتيجي</h3>
+                        <p>لا نعلمك أدوات فقط، بل كيفية التفكير التسويقي السليم الذي يضمن النتائج.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <h3>نتنقل للتنفيذ الذكي</h3>
+                        <p>نطبق الاستراتيجية باستخدام أحدث أدوات الذكاء الاصطناعي لتسريع وتيرة عملك.</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <h3>ننتهي بمنظومة متكاملة</h3>
+                        <p>تبني معنا نظاماً تسويقياً يعمل باستمرار لصالحك وينمو معك.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section id="final-cta">
+            <div class="container">
+                <h2>تعلم كيف تفكر... ثم كيف تدع الذكاء يعمل  معك   </h2>
+                <p>استثمر 5 أيام من وقتك لبناء نظام تسويقي متكامل سيخدمك لسنوات قادمة. الفرصة متاحة الآن، والمقاعد محدودة.</p>
+                <a href="الاستمارة.html" class="cta-button large" target="_blank" rel="noopener noreferrer">سجل في البرنامج الآن واضمن مكانك</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 م  برنامج المحتوى الذكي . جميع الحقوق محفوظة.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Embedded JavaScript Code -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+                    header.style.backdropFilter = 'blur(10px)';
+                } else {
+                    header.style.backgroundColor = 'var(--white-color)';
+                    header.style.backdropFilter = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
