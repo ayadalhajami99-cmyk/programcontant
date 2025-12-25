@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استمارة تسجيل - برنامج المحتوى الذكي</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f8ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(90deg, #1a2a6c, #2a3a8c);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            border-color: #4a6ee0;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 110, 224, 0.2);
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 12px 18px;
+            background-color: #f8f9ff;
+            border-radius: 8px;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .radio-option:hover {
+            background-color: #eef2ff;
+            transform: translateY(-2px);
+        }
+        
+        .radio-option input {
+            width: auto;
+            margin-left: 10px;
+            transform: scale(1.2);
+        }
+        
+        .other-input {
+            margin-top: 15px;
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(90deg, #4a6ee0, #2a3a8c);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(90deg, #2a3a8c, #1a2a6c);
+            transform: translateY(-2px);
+            box-shadow: 0 7px 15px rgba(42, 58, 140, 0.3);
+        }
+        
+        .submit-btn i {
+            margin-left: 8px;
+        }
+        
+        .whatsapp-info {
+            background-color: #f0f8ff;
+            padding: 20px;
+            border-radius: 10px;
+            border-right: 5px solid #4a6ee0;
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .phone-prefix {
+            background-color: #f8f9fa;
+            padding: 14px 10px;
+            border: 1px solid #ddd;
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .phone-input-container {
+            display: flex;
+        }
+        
+        .phone-input-container input {
+            border-radius: 10px 0 0 10px;
+            border-right: none;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .radio-option {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>برنامج المحتوى الذكي</h1>
+            <p>"انضم إلينا لاكتشاف أحدث أدوات الذكاء الاصطناعي في ريادة الاعمال وإنشاء المحتوى"</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">الاسم الكامل <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" placeholder="أدخل اسمك الكامل" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف <span class="required">*</span></label>
+                    <div class="phone-input-container">
+                        <input type="tel" id="phone" name="phone" placeholder="7XXXXXXX" pattern="[1-9][0-9]{8}" 
+                               title="يرجى إدخال 9 أرقام بدون صفر في البداية (مثال: 712345678)" required
+                               maxlength="9" oninput="validatePhoneNumber()">
+                        <div class="phone-prefix">+967 (اليمن)</div>
+                    </div>
+                    <div class="error-message" id="phoneError">يرجى إدخال 9 أرقام فقط، بدون صفر في البداية (مثال: 712345678)</div>
+                    <div style="font-size: 14px; color: #666; margin-top: 5px;">
+                        <i class="fas fa-info-circle"></i> أدخل 9 أرقام فقط (بدون صفر في البداية)
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>النوع <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="gender" value="ذكر" required>
+                            ذكر
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="gender" value="أنثى">
+                            أنثى
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>هل أنت <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="occupation" value="صاحب مشروع" required>
+                            صاحب مشروع
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="occupation" value="صاحب محتوى">
+                            صاحب محتوى
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="occupation" value="مهتم بالذكاء الاصطناعي والتسويق">
+                            مهتم بالذكاء الاصطناعي والتسويق
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="occupation" value="أخرى">
+                            أخرى
+                        </label>
+                    </div>
+                    
+                    <div id="otherInput" class="other-input">
+                        <label for="otherText">الرجاء تحديد ماهية "أخرى" <span class="required">*</span></label>
+                        <input type="text" id="otherText" name="otherText" placeholder="مثال: طالب، موظف، رائد أعمال...">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>هل لديك لابتوب؟ <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="laptop" value="نعم" required>
+                            نعم
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="laptop" value="لا">
+                            لا
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="laptop" value="سوف أوفر خلال التدريب">
+                            سوف أوفر خلال التدريب
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> إرسال التسجيل
+                </button>
+            </form>
+            
+            <div class="whatsapp-info">
+                <p><strong>سيتم التواصل معك قريباً</strong></p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 برنامج المحتوى الذكي. جميع الحقوق محفوظة.</p>
+            <p>هذا النموذج مصمم خصيصًا للتسجيل في برنامج المحتوى الذكي المتخصص في الذكاء الاصطناعي و اساسيات المحتوى</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const occupationRadios = document.querySelectorAll('input[name="occupation"]');
+            const otherInputDiv = document.getElementById('otherInput');
+            const otherTextInput = document.getElementById('otherText');
+            const phoneInput = document.getElementById('phone');
+            const phoneError = document.getElementById('phoneError');
+            
+            // التحكم في إظهار/إخفاء حقل "أخرى"
+            occupationRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'أخرى') {
+                        otherInputDiv.style.display = 'block';
+                        otherTextInput.required = true;
+                    } else {
+                        otherInputDiv.style.display = 'none';
+                        otherTextInput.required = false;
+                        otherTextInput.value = '';
+                    }
+                });
+            });
+            
+            // التحقق من صحة رقم الهاتف
+            window.validatePhoneNumber = function() {
+                const phoneValue = phoneInput.value.trim();
+                const phoneRegex = /^[1-9][0-9]{8}$/; // 9 أرقام، الرقم الأول لا يكون صفر
+                
+                if (phoneValue === '') {
+                    phoneError.style.display = 'none';
+                    phoneInput.style.borderColor = '#ddd';
+                    return false;
+                }
+                
+                if (!phoneRegex.test(phoneValue)) {
+                    phoneError.style.display = 'block';
+                    phoneInput.style.borderColor = '#e74c3c';
+                    phoneInput.style.boxShadow = '0 0 0 3px rgba(231, 76, 60, 0.2)';
+                    return false;
+                } else {
+                    phoneError.style.display = 'none';
+                    phoneInput.style.borderColor = '#4a6ee0';
+                    phoneInput.style.boxShadow = '0 0 0 3px rgba(74, 110, 224, 0.2)';
+                    return true;
+                }
+            };
+            
+            // منع إدخال أي شيء غير أرقام في حقل الهاتف
+            phoneInput.addEventListener('input', function(e) {
+                // إزالة أي حروف غير رقمية
+                this.value = this.value.replace(/\D/g, '');
+                
+                // منع الرقم من أن يبدأ بصفر
+                if (this.value.length > 0 && this.value.charAt(0) === '0') {
+                    this.value = this.value.substring(1);
+                }
+                
+                // الحد الأقصى 9 أرقام
+                if (this.value.length > 9) {
+                    this.value = this.value.substring(0, 9);
+                }
+                
+                // التحقق من الصحة في الوقت الحقيقي
+                validatePhoneNumber();
+            });
+            
+            // معالجة إرسال النموذج
+            document.getElementById('registrationForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // التحقق من صحة رقم الهاتف قبل الإرسال
+                if (!validatePhoneNumber()) {
+                    alert('يرجى إدخال رقم هاتف صحيح (9 أرقام، بدون صفر في البداية)');
+                    phoneInput.focus();
+                    return;
+                }
+                
+                // الحصول على القيم من النموذج
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const gender = document.querySelector('input[name="gender"]:checked')?.value || 'لم يتم التحديد';
+                const occupation = document.querySelector('input[name="occupation"]:checked')?.value || 'لم يتم التحديد';
+                const otherText = document.getElementById('otherText').value;
+                const laptop = document.querySelector('input[name="laptop"]:checked')?.value || 'لم يتم التحديد';
+                
+                // التحقق من صحة البيانات الأخرى
+                if (occupation === 'أخرى' && !otherText.trim()) {
+                    alert('الرجاء تحديد ماهية "أخرى" في الحقل المخصص');
+                    otherTextInput.focus();
+                    return;
+                }
+                
+                // إنشاء رسالة واتساب
+                const whatsappNumber = "736582314";
+                let occupationText = occupation;
+                
+                // إذا كانت الإجابة "أخرى"، نضيف النص الذي كتبه المستخدم
+                if (occupation === 'أخرى' && otherText.trim()) {
+                    occupationText = `أخرى (${otherText.trim()})`;
+                }
+                
+                // تنسيق رقم الهاتف لعرضه بشكل كامل
+                const formattedPhone = `+967${phone}`;
+                
+                const message = `*تسجيل جديد في برنامج المحتوى الذكي*
+                
+الاسم: ${name}
+رقم الهاتف: ${formattedPhone}
+النوع: ${gender}
+هل أنت: ${occupationText}
+هل لديك لابتوب: ${laptop}
+
+تم التسجيل عبر استمارة الويب.`;
+                
+                // تشفير الرسالة لعنوان URL
+                const encodedMessage = encodeURIComponent(message);
+                
+                // إنشاء رابط واتساب
+                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                
+                // فتح رابط واتساب في نافذة جديدة
+                window.open(whatsappURL, '_blank');
+                
+                // إظهار رسالة تأكيد للمستخدم
+                alert('تم تجهيز بياناتك بنجاح! سيتم فتح تطبيق واتساب مع رسالة جاهزة للإرسال. الرجاء إرسال الرسالة إلى الرقم المحدد.');
+            });
+            
+            // تحسين تجربة المستخدم: إضافة نمط للحقول عند التركيز
+            const inputs = document.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.style.transform = 'translateY(-2px)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
